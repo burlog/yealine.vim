@@ -51,12 +51,12 @@ let g:yealine_mode_map = {
 \ }
 
 let g:yealine_handle_spec = 1
-let g:yealine_separator_inverse = 1
-let g:yealine_separators = ["⮂", "⮀"]
+let g:yealine_separator_inverse = 0
+let g:yealine_separators = ["⮀", "⮂"]
 let g:yealine_left_boxes =  ["yealine#boxes#Buffer", "yealine#boxes#Mode", "yealine#boxes#Readonly", "yealine#boxes#Modified", "yealine#boxes#Paste", "yealine#boxes#Syntax", "yealine#boxes#Filename"]
 let g:yealine_right_boxes = ["yealine#boxes#Position", "yealine#boxes#CurrentChar"]
 
-let g:yealine_tab_separator_inverse = 1
+let g:yealine_tab_separator_inverse = 0
 let g:yealine_tab_separators = g:yealine_separators
 let g:yealine_tab_left_boxes =  ["yealine#boxes#TabEntry"]
 let g:yealine_tab_right_boxes = ["yealine#boxes#TabClose"]
