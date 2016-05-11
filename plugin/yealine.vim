@@ -16,15 +16,15 @@ augroup YeaLine
     autocmd TabLeave,TabEnter             * let &l:tabline="%!yealine#YeaTabLine()"
 augroup END
 
-let g:yealine_colors = {
+let g:_yealine_colors = {
 \    "Base":            [0, 242],
 \    "BaseCurrent":     [0, 250],
 \    "Buffer":          [243, 236],
 \    "Readonly":        [0, 160],
 \    "Modified":        [0, 220],
 \    "Paste":           [0, 220],
-\    "Syntax":          [[249, 18], [248, 241]],
-\    "Position":        [[249, 18], [248, 241]],
+\    "Syntax":          [[248, 241], [249, 18]],
+\    "Position":        [[248, 241], [249, 18]],
 \    "ModeNormal":      [0, 39],
 \    "ModeInsert":      [0, 34],
 \    "ModeReplace":     [0, 202],
@@ -37,7 +37,7 @@ let g:yealine_colors = {
 \    "TabEntry":        [[0, 237], [0, 236]],
 \ }
 
-let g:yealine_mode_map = {
+let g:_yealine_mode_map = {
 \    "n":      [g:yealine_colors["ModeNormal"], "NORMAL "],
 \    "i":      [g:yealine_colors["ModeInsert"], "INSERT "],
 \    "R":      [g:yealine_colors["ModeReplace"], "REPLACE"],
@@ -50,16 +50,16 @@ let g:yealine_mode_map = {
 \    "\<C-s>": [g:yealine_colors["ModeSelect"], "S-BLOCK"],
 \ }
 
-let g:yealine_handle_spec = 1
-let g:yealine_separator_inverse = 0
-let g:yealine_separators = ["⮀", "⮂"]
-let g:yealine_left_boxes =  ["yealine#boxes#Buffer", "yealine#boxes#Mode", "yealine#boxes#Readonly", "yealine#boxes#Modified", "yealine#boxes#Paste", "yealine#boxes#Syntax", "yealine#boxes#Filename"]
-let g:yealine_right_boxes = ["yealine#boxes#Position", "yealine#boxes#CurrentChar"]
+let g:_yealine_handle_spec = 1
+let g:_yealine_separator_inverse = 0
+let g:_yealine_separators = ["⮀", "⮂"]
+let g:_yealine_left_boxes =  ["yealine#boxes#Buffer", "yealine#boxes#Mode", "yealine#boxes#Readonly", "yealine#boxes#Modified", "yealine#boxes#Paste", "yealine#boxes#Syntax", "yealine#boxes#Filename"]
+let g:_yealine_right_boxes = ["yealine#boxes#Position", "yealine#boxes#CurrentChar"]
 
-let g:yealine_tab_separator_inverse = 0
-let g:yealine_tab_separators = g:yealine_separators
-let g:yealine_tab_left_boxes =  ["yealine#boxes#TabEntry"]
-let g:yealine_tab_right_boxes = ["yealine#boxes#TabClose"]
+let g:_yealine_tab_separator_inverse = 0
+let g:_yealine_tab_separators = g:_yealine_separators
+let g:_yealine_tab_left_boxes =  ["yealine#boxes#TabEntry"]
+let g:_yealine_tab_right_boxes = ["yealine#boxes#TabClose"]
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

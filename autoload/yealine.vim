@@ -2,38 +2,48 @@
 " Maintainer:   Michal Bukovsky <burlog@seznam.cz>
 " Licence:      MIT
 
+function! yealine#ConfGet(name, ...)
+    return get(g:, a:name, get(g:, "_" . a:name, get(a:, "1")))
+endfunction
+
+function! yealine#MapConfGet(name, value_name, ...)
+    let user_values = get(g:, a:name, {})
+    let default_values = get(g:, "_" . a:name)
+    return get(user_values, a:value_name, get(default_values, a:value_name))
+endfunction
+
 function! yealine#BaseColor(active)
-    return a:active? g:yealine_colors["BaseCurrent"]: g:yealine_colors["Base"]
+    return a:active? yealine#MapConfGet("yealine_colors", "BaseCurrent"): yealine#MapConfGet("yealine_colors", "Base")
 endfunction
 
 function! yealine#TabBaseColor()
-    return g:yealine_colors["TabBase"]
+    return yealine#MapConfGet("yealine_colors", "TabBase")
 endfunction
 
 function! yealine#YeaLine(bufno)
     let active = a:bufno == bufnr("%")
-    if g:yealine_handle_spec && getbufvar(a:bufno, "&buftype") != ""
+    if yealine#ConfGet("yealine_handle_spec") && getbufvar(a:bufno, "&buftype") != ""
         let color = call("s:make_color", yealine#BaseColor(active))
         return s:make_box([], color, "%f", "", 0, 0)
     endif
     let params = [active, a:bufno]
-    let sep = g:yealine_separators
-    let inv = g:yealine_separator_inverse
-    let [prev_color, left] = yealine#DrawBoxes(g:yealine_left_boxes, [], params, sep, inv, 0)
+    let sep = yealine#ConfGet("yealine_separators")
+    let inv = yealine#ConfGet("yealine_separator_inverse")
+    let [prev_color, left] = yealine#DrawBoxes(yealine#ConfGet("yealine_left_boxes"), [], params, sep, inv, 0)
     let color = call("s:make_color", yealine#BaseColor(active))
     let middle = s:make_box(prev_color, color, "%=", sep, inv, 0)
-    let [prev_color, right] = yealine#DrawBoxes(g:yealine_right_boxes, color, params, sep, inv, 1)
+    let [prev_color, right] = yealine#DrawBoxes(yealine#ConfGet("yealine_right_boxes"), color, params, sep, inv, 1)
     return left . middle . right
 endfunction
 
 function! yealine#YeaTabLine()
     let params = []
-    let sep = g:yealine_tab_separators
-    let inv = g:yealine_tab_separator_inverse
-    let [prev_color, left] = yealine#DrawBoxes(g:yealine_tab_left_boxes, [], params, sep, inv, 0)
+    let sep = yealine#ConfGet("yealine_tab_separators")
+    let inv = yealine#ConfGet("yealine_tab_separator_inverse")
+    let [prev_color, left] = yealine#DrawBoxes(yealine#ConfGet("yealine_tab_left_boxes"), [], params, sep, inv, 0)
     let color = call("s:make_color", yealine#TabBaseColor())
     let middle = s:make_box(prev_color, color, "%=", sep, inv, 0)
-    let [prev_color, right] = yealine#DrawBoxes(g:yealine_tab_right_boxes, color, params, sep, inv, 1)
+    let [prev_color, right] = yealine#DrawBoxes(yealine#ConfGet("yealine_tab_right_boxes"), color, params, sep, inv, 1)
     return left . middle . right
 endfunction
 
@@ -68,7 +78,7 @@ function! s:make_box(prev_color, box_color, content, sep, inv, right)
             let [ctermbg, guibg] = [a:box_color[2], a:box_color[4]]
         endif
         let highlight_name = s:make_color(ctermfg, ctermbg, guifg, guibg)[0]
-        let arrow .= " %#" . highlight_name . "#" . a:sep[a:right]
+        let arrow .= " %#" . highlight_name . "#" . a:sep[a:inv? !a:right : a:right]
     endif
     return arrow . "%#" . a:box_color[0] . "# " . a:content
 endfunction

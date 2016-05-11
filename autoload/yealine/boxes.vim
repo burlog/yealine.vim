@@ -3,7 +3,7 @@
 " Licence:      MIT
 
 function! yealine#boxes#Color(active, name)
-    let spec = get(g:yealine_colors, a:name, yealine#BaseColor(a:active))
+    let spec = yealine#MapConfGet("yealine_colors", a:name, yealine#BaseColor(a:active))
     if type(spec[0]) == type([])
         return spec[a:active]
     endif
@@ -11,7 +11,7 @@ function! yealine#boxes#Color(active, name)
 endfunction
 
 function! yealine#boxes#TabColor(name)
-    return get(g:yealine_colors, a:name, yealine#TabBaseColor())
+    return yealine#MapConfGet("yealine_colors", a:name, yealine#TabBaseColor())
 endfunction
 
 function! yealine#boxes#Buffer(active, bufno)
@@ -20,7 +20,7 @@ endfunction
 
 function! yealine#boxes#Mode(active, bufno)
     if a:active
-        return get(g:yealine_mode_map, mode(), [yealine#BaseColor(a:active), "UNKNOWN"])
+        return yealine#MapConfGet("yealine_mode_map", mode(), [yealine#BaseColor(a:active), "UNKNOWN"])
     endif
     return [yealine#BaseColor(0), "HIDDEN "]
 endfunction
