@@ -50,11 +50,11 @@ let g:_yealine_mode_map = {
 \    "\<C-s>": [g:yealine_colors["ModeSelect"], "S-BLOCK"],
 \ }
 
-let g:_yealine_handle_spec = 1
 let g:_yealine_separator_inverse = 0
 let g:_yealine_separators = ["⮀", "⮂"]
 let g:_yealine_left_boxes =  ["yealine#boxes#Buffer", "yealine#boxes#Mode", "yealine#boxes#Readonly", "yealine#boxes#Modified", "yealine#boxes#Paste", "yealine#boxes#Syntax", "yealine#boxes#Filename"]
 let g:_yealine_right_boxes = ["yealine#boxes#Position", "yealine#boxes#CurrentChar"]
+let g:_yealine_ignored_special = ["nofile"]
 
 let g:_yealine_tab_separator_inverse = 0
 let g:_yealine_tab_separators = g:_yealine_separators

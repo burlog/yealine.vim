@@ -22,7 +22,7 @@ endfunction
 
 function! yealine#YeaLine(bufno)
     let active = a:bufno == bufnr("%")
-    if yealine#ConfGet("yealine_handle_spec") && getbufvar(a:bufno, "&buftype") != ""
+    if index(yealine#ConfGet("yealine_ignored_special", []), getbufvar(a:bufno, "&buftype")) != -1
         let color = call("s:make_color", yealine#BaseColor(active))
         return s:make_box([], color, "%f", "", 0, 0)
     endif

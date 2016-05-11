@@ -2,6 +2,10 @@
 " Maintainer:   Michal Bukovsky <burlog@seznam.cz>
 " Licence:      MIT
 
+function! yealine#boxes#GetBufferFilename(bufno)
+    return fnamemodify(bufname(a:bufno), ':p')
+endfunction
+
 function! yealine#boxes#Color(active, name)
     let spec = yealine#MapConfGet("yealine_colors", a:name, yealine#BaseColor(a:active))
     if type(spec[0]) == type([])
