@@ -105,14 +105,11 @@ function! s:make_color(...)
     return s:register_color([ctermfg, ctermbg, guifg, guibg, mode])
 endfunction
 
-let s:defined_colors = {}
-
 function! s:register_color(color_spec)
     " TODO(burlog): mode
     let color_name = s:make_color_name(a:color_spec)
-    if !has_key(s:defined_colors, color_name)
+    if !hlexists(color_name)
         execute printf("highlight! %s ctermfg=%s ctermbg=%s guifg=%s guibg=%s", color_name, a:color_spec[0], a:color_spec[1], a:color_spec[2], a:color_spec[3])
-        let s:defined_colors[color_name] = 1
     endif
     return [color_name] + a:color_spec
 endfunction
