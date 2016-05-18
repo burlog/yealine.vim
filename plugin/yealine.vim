@@ -12,8 +12,9 @@ set cpo&vim
 
 augroup YeaLine
     autocmd!
-    autocmd WinLeave,WinEnter,BufWinEnter * let &l:statusline="%!yealine#YeaLine(".bufnr("%").")"
-    autocmd TabLeave,TabEnter             * let &l:tabline="%!yealine#YeaTabLine()"
+    autocmd WinEnter,BufWinEnter * let &l:statusline="%!yealine#YeaLine(".win_getid().")"
+    autocmd WinLeave,BufWinLeave * let &l:statusline="%!yealine#YeaLine(".win_getid().")"
+    autocmd TabLeave,TabEnter    * let &l:tabline="%!yealine#YeaTabLine()"
 augroup END
 
 let g:_yealine_colors = {
@@ -50,11 +51,15 @@ let g:_yealine_mode_map = {
 \    "\<C-s>": [g:yealine_colors["ModeSelect"], "S-BLOCK"],
 \ }
 
+let g:yealine_inactive_cache_timeout = 3
+
 let g:_yealine_separator_inverse = 0
 let g:_yealine_separators = ["⮀", "⮂"]
 let g:_yealine_left_boxes =  ["yealine#boxes#Buffer", "yealine#boxes#Mode", "yealine#boxes#Readonly", "yealine#boxes#Modified", "yealine#boxes#Paste", "yealine#boxes#Syntax", "yealine#boxes#Filename"]
 let g:_yealine_right_boxes = ["yealine#boxes#Position", "yealine#boxes#CurrentChar"]
-let g:_yealine_ignored_special = ["nofile"]
+let g:_yealine_handle_special = ["nofile"]
+let g:_yealine_special_left_boxes = ["yealine#boxes#Filename"]
+let g:_yealine_special_right_boxes = []
 
 let g:_yealine_tab_separator_inverse = 0
 let g:_yealine_tab_separators = g:_yealine_separators
