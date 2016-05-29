@@ -3,7 +3,8 @@
 " Licence:      MIT
 
 function! yealine#boxes#GetBufferFilename(bufno)
-    return fnamemodify(bufname(a:bufno), ':p')
+    let filename = bufname(a:bufno)
+    return filename != ""? fnamemodify(filename, ':p') : ""
 endfunction
 
 function! yealine#boxes#Color(active, name)
@@ -55,14 +56,19 @@ function! yealine#boxes#Syntax(active, bufno)
     for i in range(1, bufnr('$') + 1)
         let l = max([l, len(getbufvar(i, "&l:syntax"))])
     endfor
+    let box_color = yealine#boxes#Color(a:active, "Syntax")
     if getbufvar(a:bufno, "&l:syntax") != ""
-        return [yealine#boxes#Color(a:active, "Syntax"), "%-" . l . "." . l ."Y"]
+        return [box_color, "%-" . l . "." . l . "Y"]
     endif
-    return [yealine#BaseColor(a:active), ""]
+    let fill = ""
+    for i in range(1, l)
+        let fill = " " . fill
+    endfor
+    return [box_color, fill]
 endfunction
 
 function! yealine#boxes#CurrentChar(active, bufno)
-    return [yealine#boxes#Mode(a:active, a:bufno)[0], "[%3.3b]"]
+    return [yealine#boxes#TabColor("CurrentChar"), "[%3.3b]"]
 endfunction
 
 function! yealine#boxes#Position(active, bufno)
@@ -83,13 +89,18 @@ function! yealine#boxes#TabEntry()
     let colors = yealine#boxes#TabColor("TabEntry")
     for tab in range(1, tabpagenr('$'))
         let name = bufname(tabpagebuflist(tab)[tabpagewinnr(tab) - 1])
+        if name != ""
+            let name = fnamemodify(name, ":~:.")
+        else
+            let name = "[No filename]"
+        endif
         let content = tab . " " . ((name != "")? name : "[No name]")
         if tab == current
             let color = yealine#boxes#TabColor("TabEntryCurrent")
         else
             let color = type(colors[0]) == type([])? colors[i % len(colors)]: colors
-            let i += 1
         endif
+        let i += 1
         call add(l:tabs, [color, content])
     endfor
     return [[], l:tabs]
@@ -97,5 +108,9 @@ endfunction
 
 function! yealine#boxes#TabClose()
     return [yealine#boxes#TabColor("TabClose"), "%X× "]
+endfunction
+
+function! yealine#boxes#MiddleColor(active, bufno)
+    return yealine#BaseColor(a:active)
 endfunction
 

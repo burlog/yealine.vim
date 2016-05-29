@@ -23,7 +23,7 @@ function! yealine#TabBaseColor()
 endfunction
 
 function! yealine#YeaLine(winid)
-    if &previewwindow 
+    if getwinvar(win_id2win(a:winid), "&previewwindow")
         if has_key(s:line_cache, a:winid)
             return s:line_cache[a:winid][1]
         endif
@@ -33,12 +33,19 @@ function! yealine#YeaLine(winid)
     endif
     let bufno = winbufnr(win_id2win(a:winid))
     if active
-        return yealine#DrawLine(bufno, active)
-    endif
-    let now = strftime("%s")
-    let timeout = yealine#ConfGet("yealine_inactive_cache_timeout")
-    if !has_key(s:line_cache, a:winid) || s:line_cache[a:winid][0] < (now - timeout)
-        let s:line_cache[a:winid] = [now, yealine#DrawLine(bufno, active)]
+        if pumvisible() || !get(g:, "ycm_pummenu_closed", 1)
+            if has_key(s:line_cache, a:winid) && s:line_cache[a:winid][2]
+                return s:line_cache[a:winid][1]
+            endif
+        endif
+        let now = strftime("%s")
+        let s:line_cache[a:winid] = [now, yealine#DrawLine(bufno, active), active]
+    else
+        let now = strftime("%s")
+        let timeout = yealine#ConfGet("yealine_inactive_cache_timeout")
+        if !has_key(s:line_cache, a:winid) || s:line_cache[a:winid][2] != active || s:line_cache[a:winid][0] < (now - timeout)
+            let s:line_cache[a:winid] = [now, yealine#DrawLine(bufno, active), active]
+        endif
     endif
     return s:line_cache[a:winid][1]
 endfunction
@@ -65,8 +72,9 @@ function! yealine#DrawLine(bufno, active)
     let params = [a:active, a:bufno]
     let sep = yealine#ConfGet("yealine_separators")
     let inv = yealine#ConfGet("yealine_separator_inverse")
+    let MiddleColor = function(yealine#ConfGet("yealine_middle_color_function"))
     let [prev_color, left] = yealine#DrawBoxes(left_boxes, [], params, sep, inv, 0)
-    let color = call("s:make_color", yealine#BaseColor(a:active))
+    let color = call("s:make_color", MiddleColor(a:active, a:bufno))
     let middle = s:make_box(prev_color, color, "%=", sep, inv, 0)
     let [prev_color, right] = yealine#DrawBoxes(right_boxes, color, params, sep, inv, 1)
     return left . middle . right
@@ -88,24 +96,27 @@ function! yealine#DrawBoxes(boxes, prev_color, params, sep, inv, right)
             let line .= s:make_box(l:prev_color, box_color, content, a:sep, a:inv, a:right)
             let l:prev_color = box_color
         endif
-    endfor 
+    endfor
     return [l:prev_color, line]
 endfunction
 
 function! s:make_box(prev_color, box_color, content, sep, inv, right)
     let arrow = ""
-    if a:prev_color != [] && a:prev_color != a:box_color
-        if xor(a:right, a:inv)
-            let [ctermfg, guifg] = [a:box_color[2], a:box_color[4]]
-            let [ctermbg, guibg] = [a:prev_color[2], a:prev_color[4]]
-        else
-            let [ctermfg, guifg] = [a:prev_color[2], a:prev_color[4]]
-            let [ctermbg, guibg] = [a:box_color[2], a:box_color[4]]
+    if len(a:sep[0]) != 0 && len(a:sep[1]) != 0
+        if a:prev_color != [] && a:prev_color != a:box_color
+            if xor(a:right, a:inv)
+                let [ctermfg, guifg] = [a:box_color[2], a:box_color[4]]
+                let [ctermbg, guibg] = [a:prev_color[2], a:prev_color[4]]
+            else
+                let [ctermfg, guifg] = [a:prev_color[2], a:prev_color[4]]
+                let [ctermbg, guibg] = [a:box_color[2], a:box_color[4]]
+            endif
+            let highlight_name = s:make_color(ctermfg, ctermbg, guifg, guibg)[0]
+            let arrow .= " %#" . highlight_name . "#" . a:sep[a:inv? !a:right : a:right]
         endif
-        let highlight_name = s:make_color(ctermfg, ctermbg, guifg, guibg)[0]
-        let arrow .= " %#" . highlight_name . "#" . a:sep[a:inv? !a:right : a:right]
+        return arrow . "%#" . a:box_color[0] . "# " . a:content
     endif
-    return arrow . "%#" . a:box_color[0] . "# " . a:content
+    return arrow . "%#" . a:box_color[0] . "# " . a:content . (arrow? "": " ")
 endfunction
 
 function! s:make_color(...)

@@ -26,6 +26,7 @@ let g:_yealine_colors = {
 \    "Paste":           [0, 220],
 \    "Syntax":          [[248, 241], [249, 18]],
 \    "Position":        [[248, 241], [249, 18]],
+\    "CurrentChar":     [243, 236],
 \    "ModeNormal":      [0, 39],
 \    "ModeInsert":      [0, 34],
 \    "ModeReplace":     [0, 202],
@@ -35,20 +36,20 @@ let g:_yealine_colors = {
 \    "TabBase":         [0, 240],
 \    "TabClose":        [246, 236],
 \    "TabEntryCurrent": [0, 34],
-\    "TabEntry":        [[0, 237], [0, 236]],
+\    "TabEntry":        [[245, 236], [245, 238]],
 \ }
 
 let g:_yealine_mode_map = {
-\    "n":      [g:yealine_colors["ModeNormal"], "NORMAL "],
-\    "i":      [g:yealine_colors["ModeInsert"], "INSERT "],
-\    "R":      [g:yealine_colors["ModeReplace"], "REPLACE"],
-\    "v":      [g:yealine_colors["ModeVisual"], "VISUAL "],
-\    "V":      [g:yealine_colors["ModeVisual"], "V-LINE "],
-\    "\<C-v>": [g:yealine_colors["ModeVisual"], "V-BLOCK"],
-\    "c":      [g:yealine_colors["ModeCommand"], "COMMAND"],
-\    "s":      [g:yealine_colors["ModeSelect"], "SELECT "],
-\    "S":      [g:yealine_colors["ModeSelect"], "S-LINE "],
-\    "\<C-s>": [g:yealine_colors["ModeSelect"], "S-BLOCK"],
+\    "n":      [g:_yealine_colors["ModeNormal"], "NORMAL "],
+\    "i":      [g:_yealine_colors["ModeInsert"], "INSERT "],
+\    "R":      [g:_yealine_colors["ModeReplace"], "REPLACE"],
+\    "v":      [g:_yealine_colors["ModeVisual"], "VISUAL "],
+\    "V":      [g:_yealine_colors["ModeVisual"], "V-LINE "],
+\    "\<C-v>": [g:_yealine_colors["ModeVisual"], "V-BLOCK"],
+\    "c":      [g:_yealine_colors["ModeCommand"], "COMMAND"],
+\    "s":      [g:_yealine_colors["ModeSelect"], "SELECT "],
+\    "S":      [g:_yealine_colors["ModeSelect"], "S-LINE "],
+\    "\<C-s>": [g:_yealine_colors["ModeSelect"], "S-BLOCK"],
 \ }
 
 let g:yealine_inactive_cache_timeout = 3
@@ -60,6 +61,7 @@ let g:_yealine_right_boxes = ["yealine#boxes#Position", "yealine#boxes#CurrentCh
 let g:_yealine_handle_special = ["nofile"]
 let g:_yealine_special_left_boxes = ["yealine#boxes#Filename"]
 let g:_yealine_special_right_boxes = []
+let g:_yealine_middle_color_function = "yealine#boxes#MiddleColor"
 
 let g:_yealine_tab_separator_inverse = 0
 let g:_yealine_tab_separators = g:_yealine_separators
