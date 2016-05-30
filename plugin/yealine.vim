@@ -52,12 +52,12 @@ let g:_yealine_mode_map = {
 \    "\<C-s>": [g:_yealine_colors["ModeSelect"], "S-BLOCK"],
 \ }
 
-let g:yealine_inactive_cache_timeout = 3
+let g:_yealine_inactive_cache_timeout = 3
 
 let g:_yealine_separator_inverse = 0
 let g:_yealine_separators = ["⮀", "⮂"]
-let g:_yealine_left_boxes =  ["yealine#boxes#Buffer", "yealine#boxes#Mode", "yealine#boxes#Readonly", "yealine#boxes#Modified", "yealine#boxes#Paste", "yealine#boxes#Syntax", "yealine#boxes#Filename"]
-let g:_yealine_right_boxes = ["yealine#boxes#Position", "yealine#boxes#CurrentChar"]
+let g:_yealine_left_boxes =  ["yealine#boxes#Mode", "yealine#boxes#Readonly", "yealine#boxes#Modified", "yealine#boxes#Paste", "yealine#boxes#Syntax", "yealine#boxes#Filename"]
+let g:_yealine_right_boxes = ["yealine#boxes#Position"]
 let g:_yealine_handle_special = ["nofile"]
 let g:_yealine_special_left_boxes = ["yealine#boxes#Filename"]
 let g:_yealine_special_right_boxes = []
