@@ -50,7 +50,7 @@ you want, it should be easy to change.
 
 Statusline is splited into left and right part for that you can define list of
 boxes. In each list you can put any predefined box that you can found at
-![boxes.vim](https://github.com/burlog/yealine.vim/blob/master/autoload/yealine/boxes.vim)
+[boxes.vim](https://github.com/burlog/yealine.vim/blob/master/autoload/yealine/boxes.vim)
 .
 
 Here is incomplete list of this:
@@ -183,7 +183,7 @@ let g:yealine_inactive_cache_timeout = 3
 
 ## Custom fonts
 
-![yealine.vim - patched fonts](https://raw.githubusercontent.com/wiki/burlog/yealine.vim/img/yealine1.png)
+![yealine.vim - patched fonts](https://raw.githubusercontent.com/burlog/yealine.vim/master/img/yealine1.png)
 
 The statusline on the image above uses patched font for drawing boxes. You need
 to patch your font so you have got suitable separators characters. There is
