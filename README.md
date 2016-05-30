@@ -3,13 +3,13 @@
 This is very simple and highly customizable implementation of the vim statusline.
 
 Default look
-![yealine.vim - default](https://raw.githubusercontent.com/wiki/burlog/yealine.vim/img/yealine4.png)
+![yealine.vim - default](https://raw.githubusercontent.com/burlog/yealine.vim/master/img/yealine4.png)
 
 Default look with patched font
-![yealine.vim - patched fonts](https://raw.githubusercontent.com/wiki/burlog/yealine.vim/img/yealine1.png)
+![yealine.vim - patched fonts](https://raw.githubusercontent.com/burlog/yealine.vim/master/img/yealine1.png)
 
 Customized
-![yealine.vim - customized](https://raw.githubusercontent.com/wiki/burlog/yealine.vim/img/yealine3.png)
+![yealine.vim - customized](https://raw.githubusercontent.com/burlog/yealine.vim/master/img/yealine3.png)
 
 ## Why I wrote another statusline
 
@@ -210,7 +210,7 @@ The first character/string from `g:yealine_separators` is used for left boxes an
 second one is used for right boxes. If you want to inverse drawing set
 `g:yealine_separator_inverse` to 1.
 
-![inverse separators](https://raw.githubusercontent.com/wiki/burlog/yealine.vim/img/yealine2.png)
+![inverse separators](https://raw.githubusercontent.com/burlog/yealine.vim/master/img/yealine2.png)
 
 ## Extend Yealine
 
