@@ -40,16 +40,17 @@ let g:_yealine_colors = {
 \ }
 
 let g:_yealine_mode_map = {
-\    "n":      [g:_yealine_colors["ModeNormal"], "NORMAL "],
-\    "i":      [g:_yealine_colors["ModeInsert"], "INSERT "],
+\    "n":      [g:_yealine_colors["ModeNormal"],  "NORMAL "],
+\    "i":      [g:_yealine_colors["ModeInsert"],  "INSERT "],
 \    "R":      [g:_yealine_colors["ModeReplace"], "REPLACE"],
-\    "v":      [g:_yealine_colors["ModeVisual"], "VISUAL "],
-\    "V":      [g:_yealine_colors["ModeVisual"], "V-LINE "],
-\    "\<C-v>": [g:_yealine_colors["ModeVisual"], "V-BLOCK"],
+\    "r":      [g:_yealine_colors["ModeCommand"], "INSREPL"],
+\    "v":      [g:_yealine_colors["ModeVisual"],  "VISUAL "],
+\    "V":      [g:_yealine_colors["ModeVisual"],  "V-LINE "],
+\    "\<C-v>": [g:_yealine_colors["ModeVisual"],  "V-BLOCK"],
 \    "c":      [g:_yealine_colors["ModeCommand"], "COMMAND"],
-\    "s":      [g:_yealine_colors["ModeSelect"], "SELECT "],
-\    "S":      [g:_yealine_colors["ModeSelect"], "S-LINE "],
-\    "\<C-s>": [g:_yealine_colors["ModeSelect"], "S-BLOCK"],
+\    "s":      [g:_yealine_colors["ModeSelect"],  "SELECT "],
+\    "S":      [g:_yealine_colors["ModeSelect"],  "S-LINE "],
+\    "\<C-s>": [g:_yealine_colors["ModeSelect"],  "S-BLOCK"],
 \ }
 
 let g:_yealine_inactive_cache_timeout = 3

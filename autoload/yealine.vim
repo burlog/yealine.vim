@@ -11,7 +11,7 @@ endfunction
 function! yealine#MapConfGet(name, value_name, ...)
     let user_values = get(g:, a:name, {})
     let default_values = get(g:, "_" . a:name)
-    return get(user_values, a:value_name, get(default_values, a:value_name))
+    return get(user_values, a:value_name, get(default_values, a:value_name, get(a:, "1")))
 endfunction
 
 function! yealine#BaseColor(active)
